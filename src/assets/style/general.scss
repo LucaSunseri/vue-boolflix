@@ -2,9 +2,45 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    /*Custom Scrollbar*/
+    scrollbar-color: rgba(150, 11, 11, 0.397) rgba(72, 207, 117, 0.822);
+    scrollbar-width: thin;   
+}
+
+/* Custom Scrollbar Chrome */
+*::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  *::-webkit-scrollbar-track {
+    background: rgb(0, 0, 0);
+  }
+  
+  *::-webkit-scrollbar-thumb {
+    background-color: rgb(255, 255, 255);
+    border-radius: 20px;
+  }
+
+body {
+    font-family: Helvetica, sans-serif;
+    font-size: 14px;
 }
 
 .container {
-    width: 80%;
-    margin: 0 auto;
+    margin-top: 50px;
+    margin-left: 50px;
+}
+
+ul {
+    list-style: none;
+}
+
+li {
+    display: inline-block;
+}
+
+a {
+    text-decoration: none;
+    color: #fff;
 }
