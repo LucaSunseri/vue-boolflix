@@ -3,20 +3,28 @@
         <main>
             <div class="container">
                 <h2>Film</h2>
-                <div v-for="film in films" :key="film.id" class="film">
-                    <h3>Titolo: {{film.title}}</h3>
+                <div class="container__card">
+                    <!-- <h3>Titolo: {{film.title}}</h3>
                     <h4>Titolo Originale: {{film.original_title}}</h4>
                     <h4>Lingua: <img class="flag" :alt="film.original_language" :src="'http://purecatamphetamine.github.io/country-flag-icons/3x2/' + stampFlag(film.original_language) + `.svg`">
                     </h4>
-                    <h4>Voto: {{film.vote_average}}</h4>
+                    <h4>Voto: {{film.vote_average}}</h4> -->
+                    <Card v-for="film in films" :key="film.id"
+                        :image="`${imageUrl}${film.poster_path}`"
+                        :title="film.title"
+                    />
                 </div>
                 <h2>Serie Tv</h2>
-                <div v-for="series in tvSeries" :key="series.id" class="serie-tv">
-                    <h3>Titolo: {{series.name}}</h3>
+                <div class="container__card">
+                    <!-- <h3>Titolo: {{series.name}}</h3>
                     <h4>Titolo Originale: {{series.original_name}}</h4>
                     <h4>Lingua: <img class="flag" :alt="series.original_language" :src="'http://purecatamphetamine.github.io/country-flag-icons/3x2/' + stampFlag(series.original_language) + `.svg`">
                     </h4>
-                    <h4>Voto: {{series.vote_average}}</h4>
+                    <h4>Voto: {{series.vote_average}}</h4> -->
+                    <Card v-for="series in tvSeries" :key="series.id"
+                        :image="`${imageUrl}${series.poster_path}`"
+                        :title="series.name"
+                    />
                 </div>
             </div>
         </main>
@@ -25,12 +33,16 @@
 </template>
 
 <script>
+import Card from './Card.vue';
 
 export default {
     name: 'Main',
+    components: {
+        Card,
+    },
     data() {
         return {
-
+            imageUrl: 'https://image.tmdb.org/t/p/w185'
 
         }
     },
@@ -72,9 +84,7 @@ main {
         lighten(black, 10%),
     );
     .container {
-        div {
-            padding: 20px;
-        }
+        padding: 50px;
         .flag {
             margin-left: 5px;
             vertical-align: text-bottom;
@@ -82,6 +92,12 @@ main {
             width: 25px;
         }
     }
+}
+
+.container__card {
+    margin: 25px auto;
+    display: flex;
+    overflow-y: auto;
 }
 
 </style>

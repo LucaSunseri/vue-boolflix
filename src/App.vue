@@ -25,7 +25,7 @@ export default {
     },
     methods: {
         getToSearch(input) {
-            axios.get(`https://api.themoviedb.org/3/search/movie?&api_key=d29c9567998ea38ba500431663e2b425&query=${input}`)
+            axios.get(`https://api.themoviedb.org/3/search/movie?&api_key=d29c9567998ea38ba500431663e2b425&query=${input}&language=it`)
            .then(response => {
                this.films = response.data.results;
                console.log('Film',this.films);
@@ -33,7 +33,7 @@ export default {
            .catch(error => {
                console.log(error);
            })
-            axios.get(`https://api.themoviedb.org/3/search/tv?api_key=e99307154c6dfb0b4750f6603256716d&language=it_IT&query=${input}`)
+            axios.get(`https://api.themoviedb.org/3/search/tv?api_key=e99307154c6dfb0b4750f6603256716d&language=it&query=${input}`)
            .then(response => {
                this.tvSeries = response.data.results;
                console.log('Serie',this.tvSeries);
