@@ -5,7 +5,8 @@
                 <div v-for="film in films" :key="film.id" class="film">
                     <h3>Titolo: {{film.title}}</h3>
                     <h4>Titolo Originale: {{film.original_title}}</h4>
-                    <h4>Lingua: {{film.original_language}}</h4>
+                    <h4>Lingua: <img class="flag" :alt="film.original_language" :src="'http://purecatamphetamine.github.io/country-flag-icons/3x2/' + stampFlag(film.original_language) + `.svg`">
+                    </h4>
                     <h4>Voto: {{film.vote_average}}</h4>
                 </div>
             </div>
@@ -15,37 +16,36 @@
 </template>
 
 <script>
-import axios from 'axios';
 
 export default {
     name: 'Main',
     data() {
         return {
-            films: [],
+
+
         }
     },
     props: {
-        toSearch: String
+        films: Array
     },
     created() {
-        
+
     },
     computed: {
-        resetToSearch() {
-            return this.getApi();
-        }
 
     },
     methods: {
-        getApi() {
-           axios.get(`https://api.themoviedb.org/3/search/movie?&api_key=d29c9567998ea38ba500431663e2b425&query=${this.toSearch}`)
-           .then(response => {
-               this.films = response.data.results;
-               console.log(this.films);
-           })
-           .catch(error => {
-               console.log(error);
-           })
+        stampFlag(language) {
+            if (language === 'en'){
+                return 'GB';
+            }
+            if (language === 'ja'){
+                return 'JP';
+            }
+            if (language === 'ko'){
+                return 'KR';
+            }
+            return language.toUpperCase();
         }
     }
 }
@@ -61,6 +61,12 @@ main {
         padding: 50px;
         div {
             padding: 20px;
+        }
+        .flag {
+            margin-left: 5px;
+            vertical-align: text-bottom;
+            height: 25px;
+            width: 25px;
         }
     }
 }

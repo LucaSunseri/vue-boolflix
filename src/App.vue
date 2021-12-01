@@ -1,13 +1,15 @@
 <template>
     <div>
         <Header @getToSearch="getToSearch"></Header>
-        <Main :toSearch="input"></Main>
+        <Main :films="films"></Main>
     </div>
 </template>
 
 <script>
-import Header from './components/Header.vue'
-import Main from './components/Main.vue'
+import Header from './components/Header.vue';
+import Main from './components/Main.vue';
+
+import axios from 'axios';
 
 export default {
     name: 'App',
@@ -17,13 +19,20 @@ export default {
     },
     data() {
         return {
-            input: '',
+            films: [],
         }
     },
     methods: {
         getToSearch(input) {
-            this.input = input;
-        }
+            axios.get(`https://api.themoviedb.org/3/search/movie?&api_key=d29c9567998ea38ba500431663e2b425&query=${input}`)
+           .then(response => {
+               this.films = response.data.results;
+               console.log(this.films);
+           })
+           .catch(error => {
+               console.log(error);
+           })
+        },
     }
 }
 </script>
