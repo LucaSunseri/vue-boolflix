@@ -19,24 +19,37 @@ export default {
     },
     data() {
         return {
+            apiKey: 'd29c9567998ea38ba500431663e2b425',
             films: [],
             tvSeries: [],
         }
     },
     methods: {
         getToSearch(input) {
-            axios.get(`https://api.themoviedb.org/3/search/movie?&api_key=d29c9567998ea38ba500431663e2b425&query=${input}&language=it`)
+            axios.get(`https://api.themoviedb.org/3/search/movie?`, {
+                params: {
+                    api_key: this.apiKey,
+                    language: 'it',
+                    query: input
+                }
+            })
            .then(response => {
                this.films = response.data.results;
-               console.log('Film',this.films);
+            //    console.log('Film',this.films);
            })
            .catch(error => {
                console.log(error);
            })
-            axios.get(`https://api.themoviedb.org/3/search/tv?api_key=e99307154c6dfb0b4750f6603256716d&language=it&query=${input}`)
+            axios.get(`https://api.themoviedb.org/3/search/tv?`, {
+                params: {
+                    api_key: this.apiKey,
+                    language: 'it',
+                    query: input
+                }
+            })
            .then(response => {
                this.tvSeries = response.data.results;
-               console.log('Serie',this.tvSeries);
+            //    console.log('Serie',this.tvSeries);
            })
            .catch(error => {
                console.log(error);

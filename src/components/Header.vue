@@ -17,10 +17,12 @@
             </div>
             <div class="header__right">
                 <div class="search-bar">
-                    <i class="fas fa-search" title="Cerca..."></i>
+                    <span><b-icon icon="search"></b-icon></span>
                     <input v-model.trim="toSearch" @keyup.enter="getInput" type="text" placeholder="Titoli">
                 </div>
-                <button @click="getInput">Cerca</button>
+                <span><a href="#">Bambini</a></span>
+                <span><b-icon icon="bell-fill" font-scale="1.3"></b-icon></span>
+                <b-avatar src="https://placekitten.com/300/300"></b-avatar>
             </div>
         </header>
         
@@ -44,14 +46,20 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '~bootstrap/dist/css/bootstrap.css';
+@import '~bootstrap-vue/dist/bootstrap-vue.css';
 
 header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 80px;
+    height: 70px;
     color: #fff;
-    background-color: black;
+    background-color: rgba(0, 0, 0, 0.918);
+    a:hover {
+        color: #fff;
+        filter: brightness(65%) !important;
+    }  
 }
 
 .header__left {
@@ -60,13 +68,14 @@ header {
     margin-left: 50px;
     .logo {
         width: 10%;
+        cursor: pointer;
         img {
-            width: 80%;
+            width: 100%;
         }
     }
     .menu {
         li {
-            margin-left: 15px;
+            margin-left: 15px; 
         }
     }
 }
@@ -75,39 +84,36 @@ header {
     display: flex;
     align-items: center;
     margin-right: 50px;
+    span {
+        margin-left: 15px;
+        cursor: pointer;
+    }
 }
 
 .search-bar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 30px;
-    margin: 5px 15px;
+    height: 25px;
     border: 1px solid white;
     border-radius: 20px;
+    span {
+        margin-left: 10px;
+    }
+    input {
+        border: 0;
+        border-radius: 20px;
+        padding: 0 10px;
+        color: #fff;
+        background-color: black;
+        &:focus {
+            outline: none;
+        }
+    }
 }
 
-.search-bar i {
-    margin: 0 10px;
-}
 
-.search-bar i:hover {
-    cursor: pointer;
-}
 
-.search-bar input {
-    width: 100%;
-    height: 100%;
-    border: 0;
-    border-radius: 20px;
-    padding: 0 10px;
-    color: #fff;
-    background-color: black;
-}
-
-.search-bar input:focus {
-    outline: none;
-}
 
 
 </style>

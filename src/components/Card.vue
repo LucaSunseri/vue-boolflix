@@ -1,10 +1,10 @@
 <template>
     <div>
-        <div class="card">
-            <div class="card__image">
+        <div class="ls-card">
+            <div class="ls-card__image">
                <img :src="image" :alt="title">
             </div>
-            <div class="card__hover"></div>
+            <div class="ls-card__hover"></div>
         </div>
     </div> 
 </template>

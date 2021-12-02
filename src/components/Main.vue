@@ -15,16 +15,16 @@
                     />
                 </div>
                 <h2>Serie Tv</h2>
-                <div class="container__card">
-                    <!-- <h3>Titolo: {{series.name}}</h3>
+                <div v-for="series in tvSeries" :key="series.id" class="container__card">
+                    <h3>Titolo: {{series.name}}</h3>
                     <h4>Titolo Originale: {{series.original_name}}</h4>
                     <h4>Lingua: <img class="flag" :alt="series.original_language" :src="'http://purecatamphetamine.github.io/country-flag-icons/3x2/' + stampFlag(series.original_language) + `.svg`">
                     </h4>
-                    <h4>Voto: {{series.vote_average}}</h4> -->
-                    <Card v-for="series in tvSeries" :key="series.id"
+                    <h4>Voto: {{convertVote(series.vote_average)}}</h4>
+                    <!-- <Card v-for="series in tvSeries" :key="series.id"
                         :image="`${imageUrl}${series.poster_path}`"
                         :title="series.name"
-                    />
+                    /> -->
                 </div>
             </div>
         </main>
@@ -42,8 +42,7 @@ export default {
     },
     data() {
         return {
-            imageUrl: 'https://image.tmdb.org/t/p/w185'
-
+            imageUrl: 'https://image.tmdb.org/t/p/w185',
         }
     },
     props: {
@@ -68,6 +67,10 @@ export default {
                 return 'KR';
             }
             return language.toUpperCase();
+        },
+        
+         convertVote(vote) {
+             return Math.round(vote/2);
         }
     }
 }
@@ -76,7 +79,7 @@ export default {
 <style lang="scss" scoped>
 
 main {
-    height: calc(100vh - 80px)/*80px height header*/;
+    height: calc(100vh - 70px)/*80px height header*/;
     overflow: auto;
     color: white;
     background-image: linear-gradient(to bottom,
