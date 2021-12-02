@@ -2,40 +2,26 @@
     <div>
         <main>
             <div class="container">
-                <h2>Film</h2>
+                <h2 v-if="films.length !== 0">Film</h2>
                 <div class="container__card">
-                    <!-- <h3>Titolo: {{film.title}}</h3>
-                    <h4>Titolo Originale: {{film.original_title}}</h4>
-                    <h4>Lingua: <img class="flag" :alt="film.original_language" :src="'http://purecatamphetamine.github.io/country-flag-icons/3x2/' + stampFlag(film.original_language) + `.svg`">
-                    </h4>
-                    <h4>Voto: {{film.vote_average}}</h4> v-for="film in films" :key="film.id                         :image="`${imageUrl}${film.poster_path}`"
-                        :title="film.title"
-                        :originalTitle="film.original_title"
-                        :voteAverage="convertVote(film.vote_average)"-->
                     <Card v-for="film in films" :key="film.id"
                         :image="`${imageUrl}${film.poster_path}`"
                         :title="film.title"
                         :originalTitle="film.original_title"
                         :originalLanguage="convertLanguage(film.original_language)"
                         :voteAverage="convertVote(film.vote_average)"
+                        :overview="film.overview"
                     />
                 </div>
-                <h2>Serie Tv</h2>
+                <h2 v-if="tvSeries.length !== 0">Serie Tv</h2>
                 <div class="container__card">
-                    <!-- <h3>Titolo: {{series.name}}</h3>
-                    <h4>Titolo Originale: {{series.original_name}}</h4>
-                    <h4>Lingua: <img class="flag" :alt="series.original_language" :src="'http://purecatamphetamine.github.io/country-flag-icons/3x2/' + stampFlag(series.original_language) + `.svg`">
-                    </h4>
-                    <h4>Voto: {{convertVote(series.vote_average)}}</h4> v-for="series in tvSeries" :key="series.id"                         :image="`${imageUrl}${series.poster_path}`"
-                        :title="series.name"
-                        :originalTitle="series.original_name"
-                        :voteAverage="convertVote(series.vote_average)"-->
                     <Card v-for="series in tvSeries" :key="series.id"
                         :image="`${imageUrl}${series.poster_path}`"
                         :title="series.name"
                         :originalTitle="series.original_name"
                         :originalLanguage="convertLanguage(series.original_language)"
                         :voteAverage="convertVote(series.vote_average)"
+                        :overview="series.overview"
                     />
                 </div>
             </div>
@@ -106,11 +92,8 @@ main {
     );
     .container {
         padding: 50px;
-        .flag {
-            margin-left: 5px;
-            vertical-align: text-bottom;
-            height: 25px;
-            width: 25px;
+        h2 {
+            font-weight: 600;
         }
     }
 }
