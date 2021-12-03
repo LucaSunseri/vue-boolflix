@@ -148,7 +148,6 @@ export default {
 
 .ls-overview {
     line-height: 1rem;
-    margin-top: -10px;
     padding: 0;
 }
 

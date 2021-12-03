@@ -1,7 +1,9 @@
 <template>
     <div>
         <Header @getToSearch="getToSearch"></Header>
+        <main v-if="loading"></main>
         <Main
+            v-else
             :inputSearch="apiParams.query"
             :films="films"
             :tvSeries="tvSeries"
@@ -40,6 +42,7 @@ export default {
             topWeekFilms: [],
             topWeekTvSeries: [],
             upcomingFilms: [],
+            loading: true,
         };
     },
     mounted() {
@@ -88,6 +91,7 @@ export default {
                         this.topWeekFilms = response[0].data.results;
                         this.topWeekTvSeries = response[1].data.results;
                         this.upcomingFilms = response[2].data.results;
+                        this.loading = false;
                     })
                 )
                 .catch((error) => {
@@ -100,4 +104,13 @@ export default {
 
 <style lang="scss">
 @import "./assets/style/general.scss";
+
+main {
+    height: calc(100vh - 70px) /*80px height header*/;
+    background-image: linear-gradient(
+        to bottom,
+        lighten(black, 20%),
+        lighten(black, 10%)
+    );
+}
 </style>
