@@ -8,12 +8,25 @@
                         alt="Logo"
                     />
                 </div>
+                <!-- Menu Desktop  -->
                 <div class="menu">
                     <ul>
                         <li><a @click="toSearch = ''" href="#">Home</a></li>
                         <li><a href="#">Serie Tv</a></li>
                         <li><a href="#">Film</a></li>
                         <li><a href="#">Nuovi e Popolari</a></li>
+                    </ul>
+                </div>
+                <!-- Menu mobile and Table  -->
+                <div class="menu-mobile-tablet">
+                    <ul>
+                        <li>
+                            Sfoglia
+                            <b-icon
+                                icon="caret-down-fill"
+                                font-scale="1"
+                            ></b-icon>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -26,6 +39,9 @@
                         type="text"
                         placeholder="Titoli"
                     />
+                </div>
+                <div class="search-bar-mobile">
+                    <b-icon icon="search" font-scale="1.3"></b-icon>
                 </div>
                 <span><a href="#">Bambini</a></span>
                 <span><b-icon icon="bell-fill" font-scale="1.3"></b-icon></span>
@@ -85,6 +101,12 @@ header {
             margin-left: 15px;
         }
     }
+    .menu-mobile-tablet {
+        display: none;
+        li {
+            margin-left: 15px;
+        }
+    }
 }
 
 .header__right {
@@ -116,6 +138,32 @@ header {
         &:focus {
             outline: none;
         }
+    }
+}
+
+.search-bar-mobile {
+    display: none;
+}
+
+@media screen and (max-width: 992px) {
+    .logo {
+        width: 80px !important;
+    }
+
+    .menu {
+        display: none;
+    }
+
+    .menu-mobile-tablet {
+        display: block !important;
+    }
+
+    .search-bar {
+        display: none;
+    }
+
+    .search-bar-mobile {
+        display: block;
     }
 }
 </style>
