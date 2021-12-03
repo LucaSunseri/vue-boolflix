@@ -37,8 +37,8 @@ export default {
                 language: "it",
                 query: "",
             },
-            films: null,
-            tvSeries: null,
+            films: [],
+            tvSeries: [],
             topWeekFilms: [],
             topWeekTvSeries: [],
             upcomingFilms: [],
@@ -49,6 +49,7 @@ export default {
         this.getApiHome();
     },
     methods: {
+        // Get Api for Search
         getApiSearch() {
             const request1 = axios.get(this.apiUrlSearch + this.type[0], {
                 params: this.apiParams,
@@ -73,6 +74,7 @@ export default {
             this.apiParams.query = input;
             this.getApiSearch();
         },
+        // Get Api for HomePage
         getApiHome() {
             const request1 = axios.get(
                 "https://api.themoviedb.org/3/trending/movie/week?api_key=d29c9567998ea38ba500431663e2b425"

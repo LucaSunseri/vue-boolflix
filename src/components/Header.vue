@@ -2,22 +2,32 @@
     <div>
         <header>
             <div class="header__left">
+                <!-- Section Logo -->
                 <div class="logo">
                     <img
                         src="https://image.tmdb.org/t/p/original/wwemzKWzjKYJFfCeiB57q3r4Bcm.svg"
                         alt="Logo"
                     />
                 </div>
-                <!-- Menu Desktop  -->
+                <!-- Section Menu Desktop  -->
                 <div class="menu">
                     <ul>
-                        <li><a @click="toSearch = ''" href="#">Home</a></li>
+                        <li>
+                            <a
+                                @click="
+                                    toSearch = '';
+                                    getInput;
+                                "
+                                href="#"
+                                >Home</a
+                            >
+                        </li>
                         <li><a href="#">Serie Tv</a></li>
                         <li><a href="#">Film</a></li>
                         <li><a href="#">Nuovi e Popolari</a></li>
                     </ul>
                 </div>
-                <!-- Menu mobile and Table  -->
+                <!-- Section Menu mobile and Table  -->
                 <div class="menu-mobile-tablet">
                     <ul>
                         <li>
@@ -31,6 +41,7 @@
                 </div>
             </div>
             <div class="header__right">
+                <!-- Section Search bar -->
                 <div class="search-bar">
                     <span><b-icon icon="search"></b-icon></span>
                     <input
@@ -43,6 +54,7 @@
                 <div class="search-bar-mobile">
                     <b-icon icon="search" font-scale="1.3"></b-icon>
                 </div>
+                <!-- Section Account -->
                 <span><a href="#">Bambini</a></span>
                 <span><b-icon icon="bell-fill" font-scale="1.3"></b-icon></span>
                 <b-avatar src="https://placekitten.com/300/300"></b-avatar>

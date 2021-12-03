@@ -24,16 +24,16 @@
                 </div>
                 <!-- Section Language -->
                 <div>
-                    <span class="ls-text-card">Lingua originale: </span
-                    ><img
+                    <span class="ls-text-card">Lingua originale: </span>
+                    <img
+                        v-if="languageFlag.includes(originalLanguage)"
                         class="flag"
                         :alt="originalLanguage"
-                        :src="
-                            'http://purecatamphetamine.github.io/country-flag-icons/3x2/' +
-                            originalLanguage +
-                            `.svg`
-                        "
+                        :src="`http://purecatamphetamine.github.io/country-flag-icons/3x2/${originalLanguage}.svg`"
                     />
+                    <span v-else>
+                        {{ originalLanguage }}
+                    </span>
                 </div>
                 <!-- Section Stars (Change vote in stars) -->
                 <div>
@@ -67,6 +67,18 @@ export default {
     data() {
         return {
             imageUrl: "https://image.tmdb.org/t/p/w185/",
+            languageFlag: [
+                "GB",
+                "JP",
+                "KR",
+                "CN",
+                "IN",
+                "SV",
+                "IT",
+                "ES",
+                "FR",
+                "PT",
+            ],
         };
     },
     props: {
