@@ -6,37 +6,41 @@
                 <img :src="image" :alt="title">
             </div>
             <div class="flip-card-back">
+                <!-- Section Title (Title is the same from Original Title)-->
                 <div v-if="title == originalTitle" class="title">
                     <p><span class="ls-text-card">Titolo: </span>{{title}}</p> 
                 </div>
+                <!-- Section Title (Title different from Original Title) -->
                 <div v-else class="title">
                     <p><span class="ls-text-card">Titolo: </span>{{title}}</p> 
                     <p><span class="ls-text-card">Titolo originale: </span>{{originalTitle}}</p> 
                 </div>
+                <!-- Section Language -->
                 <p><span class="ls-text-card">Lingua originale: </span><img class="flag" :alt="originalLanguage" :src="'http://purecatamphetamine.github.io/country-flag-icons/3x2/' + originalLanguage + `.svg`"></p>
-                <!-- Change vote in stars -->
+                <!-- Section Stars (Change vote in stars) -->
                 <p v-if="voteAverage == 1"><span class="ls-text-card">Voto: </span> 
-                    <span><b-icon icon="star-fill" font-scale="1"></b-icon></span>
-                    <span v-for="index in 4" :key="index"><b-icon icon="star" font-scale="1"></b-icon></span>
+                    <b-icon icon="star-fill" font-scale="1"></b-icon>
+                    <b-icon v-for="index in 4" :key="index" icon="star" font-scale="1"></b-icon>
                 </p>
                 <p v-else-if="voteAverage == 2"><span class="ls-text-card">Voto: </span> 
-                    <span v-for="index in 2" :key="index"><b-icon icon="star-fill" font-scale="1"></b-icon></span>
-                    <span v-for="index in 3" :key="index"><b-icon icon="star" font-scale="1"></b-icon></span>
+                    <b-icon v-for="index in 2" :key="index + `a`" icon="star-fill" font-scale="1"></b-icon>
+                    <b-icon v-for="index in 3" :key="index + `b`" icon="star" font-scale="1"></b-icon>
                 </p>
                 <p v-else-if="voteAverage == 3"><span class="ls-text-card">Voto: </span> 
-                    <span v-for="index in 3" :key="index"><b-icon icon="star-fill" font-scale="1"></b-icon></span>
-                    <span v-for="index in 2" :key="index"><b-icon icon="star" font-scale="1"></b-icon></span>
+                    <b-icon v-for="index in 3" :key="index + `a`" icon="star-fill" font-scale="1"></b-icon>
+                    <b-icon v-for="index in 2" :key="index + `b`" icon="star" font-scale="1"></b-icon>
                 </p>
                 <p v-else-if="voteAverage == 4"><span class="ls-text-card">Voto: </span> 
-                    <span v-for="index in 4" :key="index"><b-icon icon="star-fill" font-scale="1"></b-icon></span>
-                    <span><b-icon icon="star" font-scale="1"></b-icon></span>
+                    <b-icon v-for="index in 4" :key="index" icon="star-fill" font-scale="1"></b-icon>
+                    <b-icon icon="star" font-scale="1"></b-icon>
                 </p>
                 <p v-else-if="voteAverage == 5"><span class="ls-text-card">Voto: </span>  
-                    <span v-for="index in 5" :key="index"><b-icon icon="star-fill" font-scale="1"></b-icon></span>
+                    <b-icon v-for="index in 5" :key="index" icon="star-fill" font-scale="1"></b-icon>
                 </p>
                 <p v-else>
-                    <span v-for="index in 5" :key="index"><b-icon icon="star" font-scale="1"></b-icon></span>
+                    <b-icon v-for="index in 5" :key="index" icon="star" font-scale="1"></b-icon>
                 </p>
+                <!-- Section Overview -->
                 <p v-if="overview"><span class="ls-text-card">Trama: </span> <br> {{overview}}</p>
             </div>
          </div>

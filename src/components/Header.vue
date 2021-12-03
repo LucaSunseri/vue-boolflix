@@ -8,7 +8,7 @@
                 </div>
                 <div class="menu">
                     <ul>
-                        <li><a href="#">Home</a></li>
+                        <li><a @click="toSearch = ''" href="#">Home</a></li>
                         <li><a href="#">Serie Tv</a></li>
                         <li><a href="#">Film</a></li>
                         <li><a href="#">Nuovi e Popolari</a></li>
@@ -37,10 +37,12 @@ export default {
             toSearch: '',
         }
     },
+    computed: {
+    },
     methods: {
         getInput() {
             this.$emit('getToSearch', this.toSearch)
-        }
+        },
     }
 }
 </script>
@@ -65,7 +67,7 @@ header {
 .header__left {
     display: flex;
     align-items: center;
-    margin-left: 50px;
+    margin-left: 5%;
     .logo {
         width: 10%;
         cursor: pointer;

@@ -1,7 +1,7 @@
 <template>
     <div>
         <Header @getToSearch="getToSearch"></Header>
-        <Main :films="films" :tvSeries="tvSeries"></Main>
+        <Main :films="films" :tvSeries="tvSeries" :inputSearch="apiParams.query"></Main>
     </div>
 </template>
 
@@ -19,42 +19,52 @@ export default {
     },
     data() {
         return {
-            apiKey: 'd29c9567998ea38ba500431663e2b425',
-            films: [],
-            tvSeries: [],
+            apiUrlSearch: `https://api.themoviedb.org/3/search/`,
+            type: ['movie?', 'tv?'],
+            rank: [],
+            apiParams: {
+                api_key: 'd29c9567998ea38ba500431663e2b425',
+                language: 'it',
+                query: ''
+            },
+            films: null,
+            tvSeries: null,
         }
     },
+    mounted() {
+    },
     methods: {
-        getToSearch(input) {
-            axios.get(`https://api.themoviedb.org/3/search/movie?`, {
-                params: {
-                    api_key: this.apiKey,
-                    language: 'it',
-                    query: input
-                }
+        getApiSearch() {
+            const requestOne = axios.get(this.apiUrlSearch + this.type[0], {params: this.apiParams});
+            const requestTwo = axios.get(this.apiUrlSearch + this.type[1], {params: this.apiParams});
+
+            axios.all([requestOne, requestTwo])
+            .then(axios.spread((...response) => {
+                this.films = response[0].data.results;
+                this.tvSeries = response[1].data.results;
+            })).catch(error => {
+                console.log(error);
             })
-           .then(response => {
-               this.films = response.data.results;
-            //    console.log('Film',this.films);
-           })
-           .catch(error => {
-               console.log(error);
-           })
-            axios.get(`https://api.themoviedb.org/3/search/tv?`, {
-                params: {
-                    api_key: this.apiKey,
-                    language: 'it',
-                    query: input
-                }
-            })
-           .then(response => {
-               this.tvSeries = response.data.results;
-            //    console.log('Serie',this.tvSeries);
-           })
-           .catch(error => {
-               console.log(error);
-           })
         },
+        getToSearch(input) {
+            this.apiParams.query = input;
+            this.getApiSearch();
+        },
+        // getApiHome() {
+        //     const requestOne = axios.get(this.apiUrlSearch + this.type[0], {params: this.apiParams});
+        //     const requestTwo = axios.get(this.apiUrlSearch + this.type[1], {params: this.apiParams});
+        //     const requestThree = axios.get(this.apiUrlSearch + this.type[2], {params: this.apiParams});
+
+        //     axios.all([requestOne, requestTwo, requestThree])
+        //     .then(axios.spread((...response) => {
+        //         this.films = response[0].data.results;
+        //         this.tvSeries = response[1].data.results;
+        //         this.prova = response[2].data.results;
+        //         console.log(this.films);
+        //     })).catch(error => {
+        //         console.log(error);
+        //     })
+        // },
     }
 }
 </script>
