@@ -1,6 +1,7 @@
 <template>
     <div>
         <main>
+            <!-- Section Home  -->
             <div v-if="inputSearch == ''" class="ls-container">
                 <h3>Film più visti della settimana</h3>
                 <div class="ls-container__card">
@@ -49,11 +50,9 @@
                 </div>
             </div>
 
+            <!-- Section Search  -->
             <div v-else class="search">
-                <div
-                    v-if="films.length > 0 || tvSeries.length > 0"
-                    class="ls-container"
-                >
+                <div v-if="foundSearch" class="ls-container">
                     <h3 v-if="films.length !== 0">Film</h3>
                     <div class="ls-container__card">
                         <Card
@@ -86,6 +85,7 @@
                     </div>
                 </div>
 
+                <!-- Section No Found Search  -->
                 <div v-else class="ls-no-found">
                     <p>
                         Nessun risultato per la tua ricerca di "{{
@@ -119,6 +119,7 @@ export default {
     },
     props: {
         inputSearch: String,
+        foundSearch: Boolean,
         films: Array,
         tvSeries: Array,
         topWeekFilms: Array,

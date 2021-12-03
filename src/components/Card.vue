@@ -22,7 +22,7 @@
                         >{{ originalTitle }}
                     </p>
                 </div>
-                <!-- Section Language -->
+                <!-- Section Language (Flag) -->
                 <div>
                     <span class="ls-text-card">Lingua originale: </span>
                     <img

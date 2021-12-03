@@ -5,6 +5,7 @@
         <Main
             v-else
             :inputSearch="apiParams.query"
+            :foundSearch="foundSearch"
             :films="films"
             :tvSeries="tvSeries"
             :topWeekFilms="topWeekFilms"
@@ -43,6 +44,7 @@ export default {
             topWeekTvSeries: [],
             upcomingFilms: [],
             loading: true,
+            foundSearch: false,
         };
     },
     mounted() {
@@ -64,6 +66,9 @@ export default {
                     axios.spread((...response) => {
                         this.films = response[0].data.results;
                         this.tvSeries = response[1].data.results;
+                        if (this.films.length == 0 || this.tvSeries == 0) {
+                            this.foundSearch = false;
+                        }
                     })
                 )
                 .catch((error) => {
@@ -73,6 +78,7 @@ export default {
         getToSearch(input) {
             this.apiParams.query = input;
             this.getApiSearch();
+            this.foundSearch = true;
         },
         // Get Api for HomePage
         getApiHome() {
