@@ -2,8 +2,13 @@
 
     <div class="flip-card">
         <div class="flip-card-inner">
-            <div class="flip-card-front">
-                <img :src="image" :alt="title">
+            <!-- Section Image -->
+            <div v-if="image" class="flip-card-front">
+                <img :src="`${imageUrl}${image}`" :alt="title">
+            </div>
+            <div v-else class="flip-card-front">
+                <img class="ls-img-default" src="../assets/img/default.jpg">
+                <h3 class="ls-text-default">{{title}}</h3>
             </div>
             <div class="flip-card-back">
                 <!-- Section Title (Title is the same from Original Title)-->
@@ -16,32 +21,14 @@
                     <p><span class="ls-text-card">Titolo originale: </span>{{originalTitle}}</p> 
                 </div>
                 <!-- Section Language -->
-                <p><span class="ls-text-card">Lingua originale: </span><img class="flag" :alt="originalLanguage" :src="'http://purecatamphetamine.github.io/country-flag-icons/3x2/' + originalLanguage + `.svg`"></p>
+                <div><span class="ls-text-card">Lingua originale: </span><img class="flag" :alt="originalLanguage" :src="'http://purecatamphetamine.github.io/country-flag-icons/3x2/' + originalLanguage + `.svg`"></div>
                 <!-- Section Stars (Change vote in stars) -->
-                <p v-if="voteAverage == 1"><span class="ls-text-card">Voto: </span> 
-                    <b-icon icon="star-fill" font-scale="1"></b-icon>
-                    <b-icon v-for="index in 4" :key="index" icon="star" font-scale="1"></b-icon>
-                </p>
-                <p v-else-if="voteAverage == 2"><span class="ls-text-card">Voto: </span> 
-                    <b-icon v-for="index in 2" :key="index + `a`" icon="star-fill" font-scale="1"></b-icon>
-                    <b-icon v-for="index in 3" :key="index + `b`" icon="star" font-scale="1"></b-icon>
-                </p>
-                <p v-else-if="voteAverage == 3"><span class="ls-text-card">Voto: </span> 
-                    <b-icon v-for="index in 3" :key="index + `a`" icon="star-fill" font-scale="1"></b-icon>
-                    <b-icon v-for="index in 2" :key="index + `b`" icon="star" font-scale="1"></b-icon>
-                </p>
-                <p v-else-if="voteAverage == 4"><span class="ls-text-card">Voto: </span> 
-                    <b-icon v-for="index in 4" :key="index" icon="star-fill" font-scale="1"></b-icon>
-                    <b-icon icon="star" font-scale="1"></b-icon>
-                </p>
-                <p v-else-if="voteAverage == 5"><span class="ls-text-card">Voto: </span>  
-                    <b-icon v-for="index in 5" :key="index" icon="star-fill" font-scale="1"></b-icon>
-                </p>
-                <p v-else>
-                    <b-icon v-for="index in 5" :key="index" icon="star" font-scale="1"></b-icon>
-                </p>
+                <div><span class="ls-text-card">Voto: </span> 
+                    <b-icon v-for="index in voteAverage" :key="index + `A`" icon="star-fill" font-scale="1"></b-icon>
+                    <b-icon v-for="index in (5-voteAverage)" :key="index + `B`" icon="star" font-scale="1"></b-icon>
+                </div>
                 <!-- Section Overview -->
-                <p v-if="overview"><span class="ls-text-card">Trama: </span> <br> {{overview}}</p>
+                <div v-if="overview"><span class="ls-text-card">Trama: </span> <br> <p class="ls-overview">{{overview}}</p></div>
             </div>
          </div>
     </div>
@@ -51,6 +38,11 @@
 <script>
 export default {
     name: 'Card',
+    data() {
+        return {
+            imageUrl: 'https://image.tmdb.org/t/p/w185/',
+        }
+    },
     props: {
         title: String,
         image: String,
@@ -75,6 +67,12 @@ export default {
   display: inline-block;
   padding: 2px;
   white-space: pre-wrap;
+  div {
+       margin-bottom: 5px;
+      p {
+          margin-bottom: 5px;
+      }
+  }
 }
 
 .flip-card-inner {
@@ -111,21 +109,40 @@ export default {
   background-color: #0a0a0ac4;
   color: white;
   transform: rotateY(180deg);
-  overflow: auto;
   font-weight: bold;
   padding: 5px 2px;
+  font-size: 12px;
+  overflow: auto;
 }
 
 .ls-text-card {
-    font-size: 13px;
+    font-size: 11px;
     color: gray;
+}
+
+.ls-overview {
+    line-height: 1rem;
+    margin-top: -10px;
+    padding: 0;
 }
 
 .flag {
     margin-left: 5px;
     vertical-align: text-bottom;
-    height: 25px;
-    width: 25px;
+    height: 20px;
+    width: 22px;
+}
+
+.ls-img-default {
+    filter: opacity(35%);
+}
+
+.ls-text-default {
+    position: absolute;
+    top: 2%;
+    left: 50%;
+    transform: translatex(-50%);
+    text-align: center;
 }
 
 </style>

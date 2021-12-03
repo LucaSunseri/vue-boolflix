@@ -2,12 +2,13 @@
     <div>
         <main>
             <div v-if="inputSearch == ''" class="text-center mt-5">Da aggiungere un Home page</div>
+
             <div v-else class="search">
-                <div v-if="films.length !== 0 || tvSeries.length !== 0" class="ls-container">
+                <div v-if="films.length > 0 || tvSeries.length > 0" class="ls-container">
                     <h3 v-if="films.length !== 0">Film</h3>
                     <div class="ls-container__card">
                         <Card v-for="film in films" :key="film.id"
-                            :image="`${imageUrl}${film.poster_path}`"
+                            :image="film.poster_path"
                             :title="film.title"
                             :originalTitle="film.original_title"
                             :originalLanguage="convertLanguage(film.original_language)"
@@ -18,7 +19,7 @@
                     <h3 v-if="tvSeries.length !== 0">Serie Tv</h3>
                     <div class="ls-container__card">
                         <Card v-for="series in tvSeries" :key="series.id"
-                            :image="`${imageUrl}${series.poster_path}`"
+                            :image="series.poster_path"
                             :title="series.name"
                             :originalTitle="series.original_name"
                             :originalLanguage="convertLanguage(series.original_language)"
@@ -27,6 +28,7 @@
                         />
                     </div>
                 </div>
+
                 <div v-else class="ls-no-found">
                     <p>Nessun risultato per la tua ricerca di "{{inputSearch}}"</p>
                     <p>Suggerimenti:</p>
@@ -36,6 +38,7 @@
                         <li>Prova a usare il titolo di un film o programma TV</li>
                     </ul>
                 </div>
+
             </div>
             
         </main>
@@ -53,7 +56,7 @@ export default {
     },
     data() {
         return {
-            imageUrl: 'https://image.tmdb.org/t/p/w185',
+            
         }
     },
     props: {
