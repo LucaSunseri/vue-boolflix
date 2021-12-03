@@ -1,10 +1,12 @@
 <template>
     <div>
-
         <header>
             <div class="header__left">
                 <div class="logo">
-                    <img src="https://image.tmdb.org/t/p/original/wwemzKWzjKYJFfCeiB57q3r4Bcm.svg" alt="Logo">
+                    <img
+                        src="https://image.tmdb.org/t/p/original/wwemzKWzjKYJFfCeiB57q3r4Bcm.svg"
+                        alt="Logo"
+                    />
                 </div>
                 <div class="menu">
                     <ul>
@@ -18,38 +20,41 @@
             <div class="header__right">
                 <div class="search-bar">
                     <span><b-icon icon="search"></b-icon></span>
-                    <input v-model.trim="toSearch" @keyup.enter="getInput" type="text" placeholder="Titoli">
+                    <input
+                        v-model.trim="toSearch"
+                        @keyup.enter="getInput"
+                        type="text"
+                        placeholder="Titoli"
+                    />
                 </div>
                 <span><a href="#">Bambini</a></span>
                 <span><b-icon icon="bell-fill" font-scale="1.3"></b-icon></span>
                 <b-avatar src="https://placekitten.com/300/300"></b-avatar>
             </div>
         </header>
-        
-    </div>  
+    </div>
 </template>
 
 <script>
 export default {
-    name: 'Header',
+    name: "Header",
     data() {
         return {
-            toSearch: '',
-        }
+            toSearch: "",
+        };
     },
-    computed: {
-    },
+    computed: {},
     methods: {
         getInput() {
-            this.$emit('getToSearch', this.toSearch)
+            this.$emit("getToSearch", this.toSearch);
         },
-    }
-}
+    },
+};
 </script>
 
 <style lang="scss" scoped>
-@import '~bootstrap/dist/css/bootstrap.css';
-@import '~bootstrap-vue/dist/bootstrap-vue.css';
+@import "~bootstrap/dist/css/bootstrap.css";
+@import "~bootstrap-vue/dist/bootstrap-vue.css";
 
 header {
     display: flex;
@@ -61,7 +66,7 @@ header {
     a:hover {
         color: #fff;
         filter: brightness(65%) !important;
-    }  
+    }
 }
 
 .header__left {
@@ -77,7 +82,7 @@ header {
     }
     .menu {
         li {
-            margin-left: 15px; 
+            margin-left: 15px;
         }
     }
 }
@@ -113,9 +118,4 @@ header {
         }
     }
 }
-
-
-
-
-
 </style>

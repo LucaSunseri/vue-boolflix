@@ -1,75 +1,103 @@
 <template>
     <div>
         <Header @getToSearch="getToSearch"></Header>
-        <Main :films="films" :tvSeries="tvSeries" :inputSearch="apiParams.query"></Main>
+        <Main
+            :inputSearch="apiParams.query"
+            :films="films"
+            :tvSeries="tvSeries"
+            :topWeekFilms="topWeekFilms"
+            :topWeekTvSeries="topWeekTvSeries"
+            :upcomingFilms="upcomingFilms"
+        >
+        </Main>
     </div>
 </template>
 
 <script>
-import Header from './components/Header.vue';
-import Main from './components/Main.vue';
+import Header from "./components/Header.vue";
+import Main from "./components/Main.vue";
 
-import axios from 'axios';
+import axios from "axios";
 
 export default {
-    name: 'App',
+    name: "App",
     components: {
         Header,
-        Main
+        Main,
     },
     data() {
         return {
             apiUrlSearch: `https://api.themoviedb.org/3/search/`,
-            type: ['movie?', 'tv?'],
-            rank: [],
+            apiUrlTrending: `https://api.themoviedb.org/3/trending/`,
+            type: ["movie?", "tv?"],
             apiParams: {
-                api_key: 'd29c9567998ea38ba500431663e2b425',
-                language: 'it',
-                query: ''
+                api_key: "d29c9567998ea38ba500431663e2b425",
+                language: "it",
+                query: "",
             },
             films: null,
             tvSeries: null,
-        }
+            topWeekFilms: [],
+            topWeekTvSeries: [],
+            upcomingFilms: [],
+        };
     },
     mounted() {
+        this.getApiHome();
     },
     methods: {
         getApiSearch() {
-            const requestOne = axios.get(this.apiUrlSearch + this.type[0], {params: this.apiParams});
-            const requestTwo = axios.get(this.apiUrlSearch + this.type[1], {params: this.apiParams});
+            const request1 = axios.get(this.apiUrlSearch + this.type[0], {
+                params: this.apiParams,
+            });
+            const request2 = axios.get(this.apiUrlSearch + this.type[1], {
+                params: this.apiParams,
+            });
 
-            axios.all([requestOne, requestTwo])
-            .then(axios.spread((...response) => {
-                this.films = response[0].data.results;
-                this.tvSeries = response[1].data.results;
-            })).catch(error => {
-                console.log(error);
-            })
+            axios
+                .all([request1, request2])
+                .then(
+                    axios.spread((...response) => {
+                        this.films = response[0].data.results;
+                        this.tvSeries = response[1].data.results;
+                    })
+                )
+                .catch((error) => {
+                    console.log(error);
+                });
         },
         getToSearch(input) {
             this.apiParams.query = input;
             this.getApiSearch();
         },
-        // getApiHome() {
-        //     const requestOne = axios.get(this.apiUrlSearch + this.type[0], {params: this.apiParams});
-        //     const requestTwo = axios.get(this.apiUrlSearch + this.type[1], {params: this.apiParams});
-        //     const requestThree = axios.get(this.apiUrlSearch + this.type[2], {params: this.apiParams});
+        getApiHome() {
+            const request1 = axios.get(
+                "https://api.themoviedb.org/3/trending/movie/week?api_key=d29c9567998ea38ba500431663e2b425"
+            );
+            const request2 = axios.get(
+                "https://api.themoviedb.org/3/trending/tv/week?api_key=d29c9567998ea38ba500431663e2b425"
+            );
+            const request3 = axios.get(
+                "https://api.themoviedb.org/3/movie/upcoming?api_key=d29c9567998ea38ba500431663e2b425&language=it&page=1"
+            );
 
-        //     axios.all([requestOne, requestTwo, requestThree])
-        //     .then(axios.spread((...response) => {
-        //         this.films = response[0].data.results;
-        //         this.tvSeries = response[1].data.results;
-        //         this.prova = response[2].data.results;
-        //         console.log(this.films);
-        //     })).catch(error => {
-        //         console.log(error);
-        //     })
-        // },
-    }
-}
+            axios
+                .all([request1, request2, request3])
+                .then(
+                    axios.spread((...response) => {
+                        this.topWeekFilms = response[0].data.results;
+                        this.topWeekTvSeries = response[1].data.results;
+                        this.upcomingFilms = response[2].data.results;
+                    })
+                )
+                .catch((error) => {
+                    console.log(error);
+                });
+        },
+    },
+};
 </script>
 
 <style lang="scss">
-@import './assets/style/general.scss'
-
+@import "./assets/style/general.scss";
 </style>

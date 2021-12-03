@@ -4,23 +4,23 @@
     box-sizing: border-box;
     /*Custom Scrollbar*/
     scrollbar-color: rgb(255, 255, 255) rgb(0, 0, 0);
-    scrollbar-width: thin;   
+    scrollbar-width: thin;
 }
 
 /* Custom Scrollbar Chrome */
 *::-webkit-scrollbar {
     width: 8px;
     height: 8px;
-  }
-  
-  *::-webkit-scrollbar-track {
+}
+
+*::-webkit-scrollbar-track {
     background: rgb(0, 0, 0);
-  }
-  
-  *::-webkit-scrollbar-thumb {
+}
+
+*::-webkit-scrollbar-thumb {
     background-color: rgb(255, 255, 255);
     border-radius: 20px;
-  }
+}
 
 body {
     font-family: Helvetica, sans-serif;
