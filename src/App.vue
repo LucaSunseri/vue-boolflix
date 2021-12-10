@@ -66,7 +66,7 @@ export default {
                     axios.spread((...response) => {
                         this.films = response[0].data.results;
                         this.tvSeries = response[1].data.results;
-                        if (this.films.length == 0 || this.tvSeries == 0) {
+                        if (this.films.length == 0 && this.tvSeries == 0) {
                             this.foundSearch = false;
                         }
                     })
